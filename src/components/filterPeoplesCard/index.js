@@ -3,12 +3,13 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg'
-import { getGenres } from "../../api/tmdb-api";
-import { useQuery } from "react-query";
-import Spinner from '../spinner'
 
 const formControl = 
   {
@@ -19,19 +20,6 @@ const formControl =
 
 export default function FilterPeoplesCard(props) {
 
-  const { data, error, isLoading, isError } = useQuery("genres", getGenres);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
-
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
-  const genres = data.genres;
-  if (genres[0].name !== "All"){
-    genres.unshift({ id: "0", name: "All" });
-  }
 
   const handleChange = (e, type, value) => {
     e.preventDefault();
@@ -40,6 +28,10 @@ export default function FilterPeoplesCard(props) {
 
   const handleTextChange = (e, props) => {
     handleChange(e, "name", e.target.value);
+  };
+
+  const handleGenderChange = (e) => {
+    handleChange(e, "gender", e.target.value);
   };
 
   return (
@@ -63,6 +55,26 @@ export default function FilterPeoplesCard(props) {
           value={props.titleFilter}
           onChange={handleTextChange}
         />
+        <FormControl sx={{...formControl}}>
+          <InputLabel id="genre-label">Gender</InputLabel>
+          <Select
+            labelId="genre-label"
+            id="genre-select"
+            defaultValue=""
+            value={props.genderFilter}
+            onChange={handleGenderChange}
+          >
+            <MenuItem key="0" value="0">
+                  All
+            </MenuItem>
+            <MenuItem key="1" value="1">
+                  Male
+            </MenuItem>
+            <MenuItem key="2" value="2">
+                  Female
+            </MenuItem>
+          </Select>
+        </FormControl>
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}

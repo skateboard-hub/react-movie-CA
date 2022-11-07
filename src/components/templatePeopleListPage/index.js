@@ -6,15 +6,21 @@ import Header from "../headerMovieList";
 
 function PeopleListPageTemplate({ peoples, title }) {
   const [nameFilter, setNameFilter] = useState("");
+  const [genderFilter, setGenderFilter] = useState("");
+
+  const genderId = Number(genderFilter);
 
   let displayedPeoples = peoples
     .filter((m) => {
       return m.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
-    
+    .filter((m) => {
+      return genderId >0 ?  m.gender !== genderId : true;
+    });
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
+    else setGenderFilter(value);
   };
 
   return (
@@ -27,6 +33,7 @@ function PeopleListPageTemplate({ peoples, title }) {
           <FilterCard
             onUserInput={handleChange}
             titleFilter={nameFilter}
+            genderFilter={genderFilter}
           />
         </Grid>
         <PeopleList peoples={displayedPeoples}></PeopleList>
