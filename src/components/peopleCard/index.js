@@ -13,8 +13,8 @@ import CardHeader from "@mui/material/CardHeader";
 export default function PeopleCard({ people }) {
 
   return (
-        <Card sx={{ maxWidth: 345 }}>
-        <CardHeader
+        <Card sx={{ maxWidth: 345,height:600 }}>
+        <CardHeader sx={{height:64}}
         title={
           <Typography variant="h5" component="p">
             {people.name}{" "}
@@ -22,7 +22,7 @@ export default function PeopleCard({ people }) {
         }
       />
           <CardMedia
-            sx={{ height: 400 }}
+            sx={{ height: 350 }}
             image={
               people.profile_path
                 ? `https://image.tmdb.org/t/p/w500/${people.profile_path}`

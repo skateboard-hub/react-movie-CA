@@ -32,8 +32,8 @@ export default function MovieCard({ movie, action }) {
     //addToFavorites(movie);
   //};
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
+    <Card sx={{ maxWidth: 345 ,height:760}}>
+      <CardHeader sx={{height:64}}
         avatar={
           movie.favorite ? (
             <Avatar sx={{ backgroundColor: 'red' }}>

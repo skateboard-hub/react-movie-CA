@@ -1,11 +1,14 @@
 import React from "react";
 import PeopleHeader from "../headerPeople";
 import Grid from "@mui/material/Grid";
-import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { getPeopleImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import "../../css/swiper.css"
 
 const TemplatePeoplePage = ({ people, children }) => {
   const { data , error, isLoading, isError } = useQuery(
@@ -20,8 +23,27 @@ const TemplatePeoplePage = ({ people, children }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const images = data.profiles
 
+  const settings = {
+    dots: true,
+    dotsClass:'slick-dots1',
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  const images = data.profiles
+  let displayImages=[]
+  if(images.length>3){
+    for(let i=0;i<3;i++){
+      displayImages.push(images[i]);
+    }
+  }
+  else{
+    displayImages=images;
+  }
+  
   return (
     <>
       <PeopleHeader people={people} />
@@ -33,9 +55,9 @@ const TemplatePeoplePage = ({ people, children }) => {
             flexWrap: "wrap",
             justifyContent: "space-around",
           }}>
-            <ImageList 
-                cols={1}>
-                {images.map((image) => (
+            <Slider {...settings}>
+            
+                {displayImages.map((image) => (
                     <ImageListItem key={image.file_path} cols={1}>
                     <img
                         src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
@@ -43,7 +65,8 @@ const TemplatePeoplePage = ({ people, children }) => {
                     />
                     </ImageListItem>
                 ))}
-            </ImageList>
+
+            </Slider>
           </div>
         </Grid>
 
