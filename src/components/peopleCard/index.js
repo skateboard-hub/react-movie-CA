@@ -11,7 +11,6 @@ import React from "react";
 import CardHeader from "@mui/material/CardHeader";
 
 export default function PeopleCard({ people }) {
-
   return (
         <Card sx={{ maxWidth: 345,height:600 }}>
         <CardHeader sx={{height:64}}
@@ -37,7 +36,7 @@ export default function PeopleCard({ people }) {
             </Grid>
           </CardContent>
           <CardActions disableSpacing>
-          <Link to={`/peoples/${people.id}`}>
+            <Link to={`/peoples/${people.id}`}>
               <Button variant="outlined" size="medium" color="primary">
                 More Info ...
               </Button>

@@ -15,6 +15,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import PeoplePage from './pages/peoplePage'
 import PeopleDetailsPage from './pages/peopleDetailsPage'
 import TopRatedMoviesPage from './pages/topRatedMoviesPage'
+import PaginationPage  from "./pages/paginationPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,10 +39,12 @@ const App = () => {
         <Route path="/movies/:id" element={<MoviePage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={ <Navigate to="/" /> } />
-        <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-        <Route path="/peoples" element={<PeoplePage />} />
+        <Route path="/upcoming/:page" element={<UpcomingMoviesPage />} />
+        <Route path="/popular/:page" element={<PeoplePage />} />
         <Route path="/peoples/:id" element={<PeopleDetailsPage />} />
-        <Route path="/movies/topRated" element={<TopRatedMoviesPage />} />
+        <Route path="/topRated/:page" element={<TopRatedMoviesPage />} />
+        <Route path="/moviespage/:page" element={<PaginationPage />} />
+
       </Routes>
         </MoviesContextProvider>
       </BrowserRouter>

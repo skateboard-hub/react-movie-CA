@@ -72,23 +72,30 @@ export const getMovie = (args) => {
       });
   };
 
-  export const getupcomingMovies = () => {
+  export const getupcomingMovies = ({ queryKey }) => {
+    const [, idPart] = queryKey;
+    const { id } = idPart;
+    
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
-      ).then((response) => {
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${id}`
+    ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
       }
       return response.json();
+  
     })
     .catch((error) => {
-       throw error
-    });
+      throw error
+   });
   };
+
   
-  export const getPeoples = () => {
+  export const getPeoples = ({ queryKey }) => {
+    const [, idPart] = queryKey;
+    const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${id}`
       ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -135,9 +142,11 @@ export const getMovie = (args) => {
    });
   };
 
-  export const getTopRatedMovies = () => {
+  export const getTopRatedMovies = ({ queryKey}) => {
+    const [, idPart] = queryKey;
+    const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${id}`
       ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -147,4 +156,22 @@ export const getMovie = (args) => {
     .catch((error) => {
        throw error
     });
+  };
+
+  export const getMoviesByPage = ({ queryKey }) => {
+    const [, idPart] = queryKey;
+    const { id } = idPart;
+    
+    return fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${id}`
+    ).then( (response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+  
+    })
+    .catch((error) => {
+      throw error
+   });
   };

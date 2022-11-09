@@ -16,7 +16,7 @@ const chip = { margin: 0.5 };
 
 const PeopleDetails = ( props) => {
   const people = props.people
-
+  
   return (
     <>
       <Typography variant="h5" component="h3">
