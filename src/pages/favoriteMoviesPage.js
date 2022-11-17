@@ -12,10 +12,15 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const FavoriteMoviesPage = () => {
   const { favorites: movieIds } = useContext(MoviesContext);
   const context = useContext(MoviesContext);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   // Create an array of queries and run in parallel.
   const favoriteMovieQueries = useQueries(
@@ -49,8 +54,6 @@ const FavoriteMoviesPage = () => {
 
   let input = ['username', 'password'];
 
-
-
   const combineContent = (e) => {
     e.preventDefault();
     switch (e.target.name) {
@@ -63,8 +66,8 @@ const FavoriteMoviesPage = () => {
       default:
         break;
     };
-    console.log(input)
   }
+
   return (
     <>
       {isLog2 ? (
@@ -90,41 +93,78 @@ const FavoriteMoviesPage = () => {
               '& .MuiOutlinedInput-root': { m: 1 },
             }}>
               <Grid container sx={{ justifyContent: 'center', margin: 'auto', height: '600px' }}>
-
-                <Card sx={{ width: '40%' ,display:'flex'}}>
-                <div style={{justifyContent: 'center', margin: 'auto'}}>
-                  <TextField
-                    required
-                    id="outlined-required"
-                    name="username"
-                    label="Username"
-                    InputLabelProps={{ shrink: true }}
-                    sx={{  width: '100%'}}
-                    onChange={(event) => combineContent(event)}
-                  />
-                  <br/>
-                  <TextField
-                    name="password"
-                    id="outlined-multiline-static"
-                    label="Password"
-                    InputLabelProps={{ shrink: true }}
-                    sx={{  width: '100%' }}
-                    onChange={(event) => combineContent(event)}
-                  />
-                  <br/>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    sx={{
-                      width: '100%'
-                    }}
-                    onClick={(event) => submitContent2(event)}
-                  >
-                    Sign In
-                  </Button>
-                </div>
+                {isMobile ? (
+                  <Card sx={{ width: '100%', display: 'flex' }}>
+                  <div style={{ justifyContent: 'center', margin: 'auto' }}>
+                    <TextField
+                      required
+                      id="outlined-required"
+                      name="username"
+                      label="Username"
+                      InputLabelProps={{ shrink: true }}
+                      sx={{ width: '100%' }}
+                      onChange={(event) => combineContent(event)}
+                    />
+                    <br />
+                    <TextField
+                      name="password"
+                      id="outlined-multiline-static"
+                      label="Password"
+                      InputLabelProps={{ shrink: true }}
+                      sx={{ width: '100%' }}
+                      onChange={(event) => combineContent(event)}
+                    />
+                    <br />
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        width: '100%'
+                      }}
+                      onClick={(event) => submitContent2(event)}
+                    >
+                      Sign In <br/>Through mobile
+                    </Button>
+                  </div>
                 </Card>
+                ): (
+                  <Card sx={{ width: '40%', display: 'flex' }}>
+                  <div style={{ justifyContent: 'center', margin: 'auto' }}>
+                    <TextField
+                      required
+                      id="outlined-required"
+                      name="username"
+                      label="Username"
+                      InputLabelProps={{ shrink: true }}
+                      sx={{ width: '100%' }}
+                      onChange={(event) => combineContent(event)}
+                    />
+                    <br />
+                    <TextField
+                      name="password"
+                      id="outlined-multiline-static"
+                      label="Password"
+                      InputLabelProps={{ shrink: true }}
+                      sx={{ width: '100%' }}
+                      onChange={(event) => combineContent(event)}
+                    />
+                    <br />
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        width: '100%'
+                      }}
+                      onClick={(event) => submitContent2(event)}
+                    >
+                      Sign In
+                    </Button>
+                  </div>
+                </Card>
+                )}
+                
 
               </Grid>
             </Box>

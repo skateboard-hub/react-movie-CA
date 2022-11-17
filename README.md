@@ -16,6 +16,7 @@ A movie app based on React and Mui
 + Extensive data hyperlinking
 + Simple responsive authentication
 + New material UIcompents
++ Responsive UI
 + Pagination
 + SlideShow
 
