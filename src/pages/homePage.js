@@ -44,7 +44,7 @@ const HomePage = (props) => {
       renderItem={(m) => (
         <PaginationItem
           component={Link}
-          to={`/${m.page === 1 ? '' : `moviespage/${m.page}`}`}
+          to={`/${m.page === 1 ? '' : `moviespage/${Number(m.page)}`}`}
           {...m}
         />
       )}

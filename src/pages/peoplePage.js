@@ -34,7 +34,7 @@ const PeopleListPage = (props) => {
       renderItem={(m) => (
         <PaginationItem
           component={Link}
-          to={`/${m.page === 1 ? '' : `popular/${m.page}`}`}
+          to={`/${m.page === 1 ? '' : `popular/${Number(m.page)}`}`}
           {...m}
         />
       )}

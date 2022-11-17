@@ -45,7 +45,7 @@ const UpcomingPage = (props) => {
       renderItem={(m) => (
         <PaginationItem
           component={Link}
-          to={`/${m.page === 1 ? '' : `upcoming/${m.page}`}`}
+          to={`/${m.page === 1 ? '' : `upcoming/${Number(m.page)}`}`}
           {...m}
         />
       )}

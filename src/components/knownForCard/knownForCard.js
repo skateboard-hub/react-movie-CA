@@ -10,13 +10,32 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
-import React from "react";
+import { MoviesContext } from "../../contexts/moviesContext";
+import React, { useContext  } from "react";
+import Avatar from '@mui/material/Avatar';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-export default function KnownForCard({ movie }) {
+
+
+export default function KnownForCard({ movie, action }) {
+  const { favorites } = useContext(MoviesContext);
+
+  if (favorites.find((id) => id === movie.id)) {
+    movie.favorite = true;
+  } else {
+    movie.favorite = false
+  }
 
   return (
     <Card sx={{ maxWidth: 345 ,height:760}}>
       <CardHeader sx={{height:64}}
+        avatar={
+          movie.favorite ? (
+          <Avatar sx={{ backgroundColor: 'red' }}>
+          <FavoriteIcon />
+          </Avatar>
+        ) : null
+      }
         title={
           <Typography variant="h5" component="p">
             {movie.title}{" "}
@@ -46,7 +65,7 @@ export default function KnownForCard({ movie }) {
           </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        
+        {action(movie)}
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...

@@ -11,10 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { Link } from "react-router-dom";
+
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-const SiteHeader = ({ history }) => {
+const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -25,7 +29,6 @@ const SiteHeader = ({ history }) => {
 
   const menuOptions = [
     { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/upcoming/1" },
     { label: "TopRated", path: "/topRated/1" },
     { label: "People", path: "/popular/1" },
@@ -38,6 +41,7 @@ const SiteHeader = ({ history }) => {
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
 
   return (
     <>
@@ -83,6 +87,11 @@ const SiteHeader = ({ history }) => {
                       {opt.label}
                     </MenuItem>
                   ))}
+                  <Link to={`/movies/favorites`}>
+                  <Stack direction="row" spacing={1} sx={{ display: 'flex', justifyContent: 'center'}}>
+                    <Avatar />
+                  </Stack>
+                  </Link>
                 </Menu>
               </>
             ) : (
@@ -96,6 +105,11 @@ const SiteHeader = ({ history }) => {
                     {opt.label}
                   </Button>
                 ))}
+                <Link to={`/movies/favorites`}>
+                <Stack direction="row" spacing={1}>
+                  <Avatar />
+                </Stack>
+                </Link>
               </>
             )}
         </Toolbar>

@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import React from "react";
 import CardHeader from "@mui/material/CardHeader";
+import EnterPeopleDetails from "../cardIcons/enterPeopleDetail";
+import { Link } from "react-router-dom";
+
 
 export default function PeopleCard({ people }) {
   return (
@@ -37,11 +38,10 @@ export default function PeopleCard({ people }) {
           </CardContent>
           <CardActions disableSpacing>
             <Link to={`/peoples/${people.id}`}>
-              <Button variant="outlined" size="medium" color="primary">
-                More Info ...
-              </Button>
+              <EnterPeopleDetails people={people}>
+              </EnterPeopleDetails>
             </Link>
           </CardActions>
         </Card>
       );
-    }
+}
